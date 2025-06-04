@@ -1,28 +1,47 @@
 carrinho = []
 
-carrinho.append(["Arroz", 2, 5.50])
-carrinho.append(["Feijão", 1, 7.30])
-carrinho.append(["Macarrão", 3, 4.20])
+print("=== Sistema de Carrinho de Compras ===")
 
+while True:
+    print("\n1 - Adicionar item ao carrinho")
+    print("2 - Remover último item")
+    print("3 - Mostrar carrinho")
+    print("0 - Sair")
 
-print("Carrinho de compras:")
-print("Produto     Quantidade    Preço Unitário    Total")
-for item in carrinho:
-    produto, quantidade, preco = item
-    total = quantidade * preco
-    print(f"{produto:<12} {quantidade:<12} R${preco:<15.2f} R${total:.2f}")
+    opcao = input("Escolha uma opção: ")
 
+    if opcao == '1':
+        produto = input("Nome do produto: ")
+        quantidade = int(input("Quantidade: "))
+        preco = float(input("Preço unitário: R$ "))
+        carrinho.append([produto, quantidade, preco])
+        print(f"{produto} adicionado ao carrinho.")
 
-if carrinho:
-    removido = carrinho.pop()
-    print(f"\nProduto removido: {removido[0]}")
-else:
-    print("\nCarrinho vazio, nada para remover.")
+    elif opcao == '2':
+        if carrinho:
+            removido = carrinho.pop()
+            print(f"Produto removido: {removido[0]}")
+        else:
+            print("Carrinho vazio, nada para remover.")
 
+    elif opcao == '3':
+        if not carrinho:
+            print("Carrinho vazio.")
+        else:
+            print("\nCarrinho de compras:")
+            print("Produto       Quantidade    Preço Unitário    Total")
+            total_geral = 0
+            for item in carrinho:
+                produto, quantidade, preco = item
+                total = quantidade * preco
+                total_geral += total
+                print(f"{produto:<13} {quantidade:<12} R${preco:<15.2f} R${total:.2f}")
+            print(f"\nTotal geral: R${total_geral:.2f}")
 
-print("\nCarrinho atualizado:")
-print("Produto     Quantidade    Preço Unitário    Total")
-for item in carrinho:
-    produto, quantidade, preco = item
-    total = quantidade * preco
-    print(f"{produto:<12} {quantidade:<12} R${preco:<15.2f} R${total:.2f}")
+    elif opcao == '0':
+        break
+
+    else:
+        print("Opção inválida. Tente novamente.")
+
+print("\nObrigado por usar o carrinho de compras!")
